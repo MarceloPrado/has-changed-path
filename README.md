@@ -44,7 +44,7 @@ jobs:
       with:
         fetch-depth: 100
 
-    - uses: marceloprado/has-changed-path@v1
+    - uses: marceloprado/has-changed-path@master
       id: changed-front
       with:
         paths: packages/front
@@ -73,7 +73,7 @@ jobs:
       with:
         fetch-depth: 100
 
-    - uses: marceloprado/has-changed-path@v1
+    - uses: marceloprado/has-changed-path@master
       id: changed-front
       with:
         paths: packages/front packages/common

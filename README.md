@@ -6,9 +6,9 @@ It solves a common issue among monorepo setups: conditional actions. Deploying a
 
 With this action, **you know if a deployment or any other job needs to run based on the changed paths of the most recent commit.**
 
-It differs from [Github's paths](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) as our action is meant to be used inside your jobs, not at the root of your workflow file (see [this issue](https://github.community/t5/GitHub-Actions/Path-filtering-for-jobs-and-steps/td-p/33617)).
+It differs from [Github's paths](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) as our action is meant to be used inside your job steps, not at the root of your workflow file (see [this issue](https://github.community/t5/GitHub-Actions/Path-filtering-for-jobs-and-steps/td-p/33617)).
 
-A good place to put it is in a workflow that runs on every push to `master`, as it will run on pull request merges.
+My recommendation is to put this action in a workflow that runs on every push to `master`.
 
 ## Inputs
 
@@ -16,7 +16,7 @@ A good place to put it is in a workflow that runs on every push to `master`, as 
 
 ## Outputs
 
-- `changed`: boolean indicating if the paths were changed in previous commit
+- `changed`: boolean indicating if the paths changed at the latest commit
 
 ## Example workflows
 
@@ -56,7 +56,7 @@ jobs:
 
 ### Detecting changes in multiple paths:
 
-Useful when you have dependencies between packages (eg. /common package used in /front and /server).
+Useful when you have dependencies between packages (eg. `/common` package used in `/front` and `/server`).
 Below, the output would be truthy for any given change inside `packages/front` **or** `packages/common`.
 
 ```
@@ -87,7 +87,7 @@ jobs:
 
 The action itself is pretty simple - take a look at `entrypoint.sh` ;) .
 
-Basically, the latest commit SHA is compared with the latest commit in path. If they're the same, it means the path was changed at this commit and the action output is `true`.
+Basically, the latest commit SHA is compared with the latest commit in path. If they're the same, it means the path was changed and the action output is `true`.
 
 To get the lastest commit in path, we're using `git log -1 --format=format:%H --full-diff $PATHS_TO_SEARCH`.
 

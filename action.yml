@@ -1,0 +1,14 @@
+name: "Has Changed Path"
+description: "Detects whether a path or a combination of paths were changed in the previous commit"
+inputs:
+  paths: # one or more paths
+    description: "Paths to detect changes"
+    required: true
+outputs:
+  changed:
+    description: "Boolean indicating if the paths were changed in previous commit"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.paths }}

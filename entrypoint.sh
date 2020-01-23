@@ -1,9 +1,9 @@
 #!/bin/sh -l
 set -euo pipefail
 
-SOURCE=${source:-.}
+source=${SOURCE:-.}
 
-cd ${GITHUB_WORKSPACE}/${SOURCE}
+cd ${GITHUB_WORKSPACE}/${source}
 
 # This script returns `true` if the paths passed as
 # arguments were changed in the last commit.

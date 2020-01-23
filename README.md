@@ -110,13 +110,15 @@ jobs:
       id: changed-main
       with:
         paths: packages/front
-        source: main
+      env:
+        SOURCE: main
 
     - uses: marceloprado/has-changed-path@master
       id: changed-my-tools
       with:
         paths: somewhere/else
-        source: my-tools
+      env:
+        SOURCE: main
 
     - name: Deploy main
       if: steps.changed-main.outputs.changed == 'true'

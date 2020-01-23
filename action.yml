@@ -4,9 +4,6 @@ inputs:
   paths: # one or more paths
     description: "Paths to detect changes"
     required: true
-  source:
-    description: "Paths to source repository"
-    required: false
 outputs:
   changed:
     description: "Boolean indicating if the paths were changed in previous commit"

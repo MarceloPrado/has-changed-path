@@ -118,7 +118,7 @@ jobs:
       with:
         paths: somewhere/else
       env:
-        SOURCE: main
+        SOURCE: my-tools
 
     - name: Deploy main
       if: steps.changed-main.outputs.changed == 'true'

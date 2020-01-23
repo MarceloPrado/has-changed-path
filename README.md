@@ -83,6 +83,50 @@ jobs:
       run: /deploy-front.sh
 ```
 
+### Detecting a one-path change with checkout multiple repos:
+
+```
+name: Conditional Deploy
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 100
+        path: main
+
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 100
+        repsitory: my-org/my-tools
+        path: my-tools
+
+    - uses: marceloprado/has-changed-path@master
+      id: changed-main
+      with:
+        paths: packages/front
+        source: main
+
+    - uses: marceloprado/has-changed-path@master
+      id: changed-my-tools
+      with:
+        paths: somewhere/else
+        source: my-tools
+
+    - name: Deploy main
+      if: steps.changed-main.outputs.changed == 'true'
+      run: /deploy-main.sh
+
+    - name: Deploy my tools
+      if: steps.changed-my-tools.outputs.changed == 'true'
+      run: /deploy-my-tools.sh
+```
+
 ## How it works?
 
 The action itself is pretty simple - take a look at `entrypoint.sh` ;) .

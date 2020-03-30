@@ -12,7 +12,7 @@ My recommendation is to put this action in a workflow that runs on every push to
 
 ## Inputs
 
-- `paths` (required): Paths to detect changes.
+- `paths` (required): Path to detect changes. It's possible to pass one path, a combination or a wildcard. Valid options include: `packages/front`, `packages/front packages/shared`, `packages/**/shared`. See workflow examples below for more information.
 
 ## Outputs
 

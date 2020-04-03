@@ -22,7 +22,7 @@ My recommendation is to put this action in a workflow that runs on every push to
 
 ### Important info:
 
-Notice that **you must configure `fetch-depth` in your `actions/checkout@v2`**. That's because their default option now is to fetch only the latest commit instead of all history ([more info](https://github.com/actions/checkout)) 
+Notice that **you must configure `fetch-depth` in your `actions/checkout@v2`**. That's because their default option now is to fetch only the latest commit instead of all history ([more info](https://github.com/actions/checkout))
 
 If you want to fetch all history, pass `fetch-depth: 0`.
 
@@ -133,9 +133,9 @@ jobs:
 
 The action itself is pretty simple - take a look at `entrypoint.sh` ;) .
 
-Basically, the latest commit SHA is compared with the latest commit in path. If they're the same, it means the path was changed and the action output is `true`.
+Basically, we compare the latest HEAD with the previous one using `git diff` command. This allows us to effectively detect changes in most cases (squashed merges and merges with merge commit).
 
-To get the lastest commit in path, we're using `git log -1 --format=format:%H --full-diff $PATHS_TO_SEARCH`.
+The algorithm works very similar with [Netlify's default way](https://community.netlify.com/t/monorepo-and-long-builds/7234/2) way for detecting changes in monorepo builds.
 
 ## Contribute
 

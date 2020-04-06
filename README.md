@@ -30,7 +30,7 @@ For monorepo packages, where history tends to be larger than single repos, it ma
 
 ### Detecting a simple one-path change:
 
-```
+```yaml
 name: Conditional Deploy
 
 on: push
@@ -59,7 +59,7 @@ jobs:
 Useful when you have dependencies between packages (eg. `/common` package used in `/front` and `/server`).
 Below, the output would be truthy for any given change inside `packages/front` **or** `packages/common`.
 
-```
+```yaml
 name: Conditional Deploy
 
 on: push
@@ -85,7 +85,7 @@ jobs:
 
 ### Detecting a one-path change with checkout multiple repos:
 
-```
+```yaml
 name: Conditional Deploy
 
 on: push

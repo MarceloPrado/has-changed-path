@@ -33,9 +33,6 @@ async function hasChanged(pathsToSearch) {
     cwd: getCWD()
   })
 
-  console.log(exitCode)
-  console.log('i was called')
-
   const pathsChanged = exitCode === 1
 
   return pathsChanged

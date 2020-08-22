@@ -14,7 +14,9 @@ jobs:
         with:
           fetch-depth: 100
       - run: yarn install --frozen-lockfile
-      - run: yarn test
+      - run: |
+          yarn lint
+          yarn test
 
   example-usage:
     runs-on: ubuntu-latest

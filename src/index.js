@@ -8,8 +8,6 @@ async function run() {
     const paths = core.getInput('paths', { required: true });
     const changed = await hasChanged(paths)
 
-    core.info(`Action output: ${changed}`)
-
     if (changed) {
       core.info(`Code in the following paths changed: ${paths}`)
     } else {

@@ -29,12 +29,3 @@ jobs:
 
       - if: steps.has-changed-path.outputs.changed == 'true'
         run: echo 'Code in src/ or tests/ has changed!'
-
-  has-changed-path:
-    needs: unit-tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          paths: src/ tests/

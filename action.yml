@@ -1,5 +1,7 @@
 name: "Has Changed Path"
 description: "Detects whether a path or a combination of paths were changed in the previous commit"
+icon: terminal
+color: gray-dark
 inputs:
   paths: # one or more paths
     description: "Paths to detect changes"

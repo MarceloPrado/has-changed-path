@@ -48,6 +48,10 @@ describe('index.js', () => {
     const actionFile = path.join(getSrcRoot(), 'index.js');
 
     cp.exec(`node ${actionFile}`, { env: process.env }, (err, res) => {
+      if (err) {
+        console.log(err)
+      }
+
       expect(err).toBe(null)
 
       console.log(res.toString())
@@ -61,3 +65,5 @@ describe('index.js', () => {
 function getSrcRoot() {
   return path.resolve(process.cwd(), 'src')
 }
+
+// FIXME: forcing commit

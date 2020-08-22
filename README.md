@@ -1,7 +1,7 @@
 # Has Changed Path - Github Action
 
 <p align="left">
-  <a href="https://github.com/MarceloPrado/has-changed-path/actions"><img alt="has-changed-path status" src="https://github.com/MarceloPrado/has-changed-path/actions/test/badge.svg"></a>
+  <a href="https://github.com/MarceloPrado/has-changed-path/actions"><img alt="has-changed-path status" src="https://github.com/MarceloPrado/has-changed-path/workflows/unit-tests/badge.svg"></a>
 </p>
 
 This action outputs whether a path or combination of paths has changed in the previous commit.

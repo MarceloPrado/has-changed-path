@@ -7,19 +7,25 @@ on:
       - "releases/*"
 
 jobs:
-  # unit tests
-  units:
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: yarn install --frozen-lockfile
       - run: yarn test
 
-  # test action works running from the graph
-  test:
+  example-usage:
     runs-on: ubuntu-latest
+    needs: unit-tests
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 10
+
       - uses: ./
+        id: has-changed-path
         with:
           paths: src/ tests/
+
+      - if: steps.has-changed-path.outputs.changed == 'true'
+        run: echo 'Code in src/ or tests/ has changed!'

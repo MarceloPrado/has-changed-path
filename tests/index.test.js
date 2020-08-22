@@ -48,6 +48,10 @@ describe('index.js', () => {
     const actionFile = path.join(getSrcRoot(), 'index.js');
 
     cp.exec(`node ${actionFile}`, { env: process.env }, (err, res) => {
+      if (err) {
+        console.log(err)
+      }
+
       expect(err).toBe(null)
 
       console.log(res.toString())
@@ -63,3 +67,4 @@ function getSrcRoot() {
 }
 
 // FIXME: forcing commit
+// FIXME: forcing change

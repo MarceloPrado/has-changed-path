@@ -135,7 +135,7 @@ jobs:
 
 ## How it works?
 
-The action itself is pretty simple - take a look at `entrypoint.sh` ;) .
+The action itself is pretty simple - take a look at `src/hasChanged.js` ;) .
 
 Basically, we compare the latest HEAD with the previous one using `git diff` command. This allows us to effectively detect changes in most cases (squashed merges and merges with merge commit).
 

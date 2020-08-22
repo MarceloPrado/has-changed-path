@@ -1,5 +1,9 @@
 # Has Changed Path - Github Action
 
+<p align="left">
+  <a href="https://github.com/MarceloPrado/has-changed-path/actions"><img alt="has-changed-path status" src="https://github.com/MarceloPrado/has-changed-path/workflows/unit-tests/badge.svg"></a>
+</p>
+
 This action outputs whether a path or combination of paths has changed in the previous commit.
 
 It solves a common issue among monorepo setups: conditional actions. Deploying a project that did not change in the previous commit could be a waste of time and resources.
@@ -40,18 +44,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 100
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
 
-    - uses: marceloprado/has-changed-path@master
-      id: changed-front
-      with:
-        paths: packages/front
+      - uses: marceloprado/has-changed-path@master
+        id: changed-front
+        with:
+          paths: packages/front
 
-    - name: Deploy front
-      if: steps.changed-front.outputs.changed == 'true'
-      run: /deploy-front.sh
+      - name: Deploy front
+        if: steps.changed-front.outputs.changed == 'true'
+        run: /deploy-front.sh
 ```
 
 ### Detecting changes in multiple paths:
@@ -69,18 +73,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 100
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
 
-    - uses: marceloprado/has-changed-path@master
-      id: changed-front
-      with:
-        paths: packages/front packages/common
+      - uses: marceloprado/has-changed-path@master
+        id: changed-front
+        with:
+          paths: packages/front packages/common
 
-    - name: Deploy front
-      if: steps.changed-front.outputs.changed == 'true'
-      run: /deploy-front.sh
+      - name: Deploy front
+        if: steps.changed-front.outputs.changed == 'true'
+        run: /deploy-front.sh
 ```
 
 ### Detecting a one-path change with checkout multiple repos:
@@ -95,43 +99,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 100
-        path: main
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+          path: main
 
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 100
-        repsitory: my-org/my-tools
-        path: my-tools
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+          repsitory: my-org/my-tools
+          path: my-tools
 
-    - uses: marceloprado/has-changed-path@master
-      id: changed-main
-      with:
-        paths: packages/front
-      env:
-        SOURCE: main
+      - uses: marceloprado/has-changed-path@master
+        id: changed-main
+        with:
+          paths: packages/front
+        env:
+          SOURCE: main
 
-    - uses: marceloprado/has-changed-path@master
-      id: changed-my-tools
-      with:
-        paths: somewhere/else
-      env:
-        SOURCE: my-tools
+      - uses: marceloprado/has-changed-path@master
+        id: changed-my-tools
+        with:
+          paths: somewhere/else
+        env:
+          SOURCE: my-tools
 
-    - name: Deploy main
-      if: steps.changed-main.outputs.changed == 'true'
-      run: /deploy-main.sh
+      - name: Deploy main
+        if: steps.changed-main.outputs.changed == 'true'
+        run: /deploy-main.sh
 
-    - name: Deploy my tools
-      if: steps.changed-my-tools.outputs.changed == 'true'
-      run: /deploy-my-tools.sh
+      - name: Deploy my tools
+        if: steps.changed-my-tools.outputs.changed == 'true'
+        run: /deploy-my-tools.sh
 ```
 
 ## How it works?
 
-The action itself is pretty simple - take a look at `entrypoint.sh` ;) .
+The action itself is pretty simple - take a look at `src/hasChanged.js` ;) .
 
 Basically, we compare the latest HEAD with the previous one using `git diff` command. This allows us to effectively detect changes in most cases (squashed merges and merges with merge commit).
 

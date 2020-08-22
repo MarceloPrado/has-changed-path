@@ -1,0 +1,29 @@
+{
+  "name": "has-changed-path",
+  "version": "1.0.0",
+  "description": "Github Action that saves time and money in monorepo environments",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "prepare": "ncc build src/index.js -o dist --source-map",
+    "test": "jest",
+    "all": "yarn lint && yarn prepare && yarn test"
+  },
+  "repository": "git@github.com:MarceloPrado/has-changed-path.git",
+  "author": "Marcelo Prado <lelo@hey.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarceloPrado/has-changed-path/issues"
+  },
+  "homepage": "https://github.com/MarceloPrado/has-changed-path#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/exec": "^1.0.4"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.23.0",
+    "eslint": "^7.7.0",
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.4.2"
+  }
+}

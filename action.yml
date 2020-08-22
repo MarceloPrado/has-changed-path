@@ -8,7 +8,5 @@ outputs:
   changed:
     description: "Boolean indicating if the paths were changed in previous commit"
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.paths }}
+  using: "node12"
+  main: "dist/index.js"

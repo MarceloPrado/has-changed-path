@@ -18,12 +18,19 @@ function getCWD() {
 
 async function hasChanged(pathsToSearch) {
   //  --quiet: exits with 1 if there were differences (https://git-scm.com/docs/git-diff)
-  const exitCode = await exec.exec('git diff', ['--quiet', 'HEAD~1 HEAD', '--', pathsToSearch], {
+  const exitCode = await exec.exec('git', [
+    'diff',
+    '--quiet',
+    'HEAD~1 HEAD',
+    '--',
+    pathsToSearch
+  ], {
     ignoreReturnCode: true,
-    silent: true,
+    silent: false,
     cwd: getCWD()
   })
 
+  console.log(exitCode)
   const pathsChanged = exitCode === 1
 
   return pathsChanged

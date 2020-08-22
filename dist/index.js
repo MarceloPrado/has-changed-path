@@ -1405,8 +1405,6 @@ const exec = __webpack_require__(514)
 async function main(pathsToSearch = '') {
   throwsForInvalidPaths(pathsToSearch)
 
-  await changeDirectory()
-
   return hasChanged(pathsToSearch)
 }
 
@@ -1415,14 +1413,18 @@ function throwsForInvalidPaths(pathsToSearch) {
   throw new Error('pathsToSearch needs to be a string')
 }
 
-async function changeDirectory() {
+function getCWD() {
   const { GITHUB_WORKSPACE = '.', SOURCE = '.' } = process.env
-  await exec.exec(`cd ${GITHUB_WORKSPACE}/${SOURCE}`)
+  return `${GITHUB_WORKSPACE}/${SOURCE}`
 }
 
 async function hasChanged(pathsToSearch) {
   //  --quiet: exits with 1 if there were differences (https://git-scm.com/docs/git-diff)
-  const exitCode = await exec.exec('git diff', ['--quiet', 'HEAD~1 HEAD', '--', pathsToSearch], { ignoreReturnCode: true, silent: true })
+  const exitCode = await exec.exec('git diff', ['--quiet', 'HEAD~1 HEAD', '--', pathsToSearch], {
+    ignoreReturnCode: true,
+    silent: true,
+    cwd: getCWD()
+  })
 
   const pathsChanged = exitCode === 1
 

@@ -16,7 +16,8 @@ jobs:
       - run: yarn test
 
   # test action works running from the graph
-  test:
+  has-changed-path:
+    needs: units
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

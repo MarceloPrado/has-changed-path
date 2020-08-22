@@ -135,7 +135,7 @@ The action itself is pretty simple - take a look at `entrypoint.sh` ;) .
 
 Basically, we compare the latest HEAD with the previous one using `git diff` command. This allows us to effectively detect changes in most cases (squashed merges and merges with merge commit).
 
-The algorithm works very similar with [Netlify's default way](https://community.netlify.com/t/monorepo-and-long-builds/7234/2) way for detecting changes in monorepo builds.
+The algorithm works very similar with [Netlify's default way](https://community.netlify.com/t/monorepo-and-long-builds/7234/2) for detecting changes in monorepo builds.
 
 ## Contribute
 

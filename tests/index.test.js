@@ -65,5 +65,3 @@ describe('index.js', () => {
 function getSrcRoot() {
   return path.resolve(process.cwd(), 'src')
 }
-
-// FIXME: forcing commit

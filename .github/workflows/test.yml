@@ -31,7 +31,7 @@ jobs:
         run: echo 'Code in src/ or tests/ has changed!'
 
   has-changed-path:
-    needs: units
+    needs: unit-tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

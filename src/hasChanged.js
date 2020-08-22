@@ -15,7 +15,7 @@ function throwsForInvalidPaths(pathsToSearch) {
 
 async function changeDirectory() {
   const { GITHUB_WORKSPACE = '.', SOURCE = '.' } = process.env
-  await exec.exec('cd', [`${GITHUB_WORKSPACE}/${SOURCE}`], { silent: true })
+  await exec.exec(`cd ${GITHUB_WORKSPACE}/${SOURCE}`)
 }
 
 async function hasChanged(pathsToSearch) {

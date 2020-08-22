@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/MarceloPrado/has-changed-path#readme",
   "dependencies": {
-    "@actions/core": "^1.2.4"
+    "@actions/core": "^1.2.4",
+    "@actions/exec": "^1.0.4"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.23.0",

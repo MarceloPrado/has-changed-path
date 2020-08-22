@@ -8,3 +8,5 @@ test('throws for invalid paths', async () => {
   await expect(hasChanged([])).rejects.toThrow(errMsg);
   await expect(hasChanged(12)).rejects.toThrow(errMsg);
 });
+
+// TODO: test git diff results

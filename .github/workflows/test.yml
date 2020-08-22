@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
       - run: yarn install --frozen-lockfile
       - run: yarn test
 
@@ -20,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 10
+          fetch-depth: 100
 
       - uses: ./
         id: has-changed-path

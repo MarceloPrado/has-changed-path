@@ -1,4 +1,4 @@
-# Has Changed Path - Github Action
+# Has Changed Path - GitHub Action
 
 <p align="left">
   <a href="https://github.com/MarceloPrado/has-changed-path/actions"><img alt="has-changed-path status" src="https://github.com/MarceloPrado/has-changed-path/workflows/unit-tests/badge.svg"></a>
@@ -10,7 +10,7 @@ It solves a common issue among monorepo setups: conditional actions. Deploying a
 
 With this action, **you know if a deployment or any other job needs to run based on the changed paths of the most recent commit.**
 
-It differs from [Github's paths](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) as our action is meant to be used inside your job steps, not at the root of your workflow file (see [this issue](https://github.community/t5/GitHub-Actions/Path-filtering-for-jobs-and-steps/td-p/33617)).
+It differs from [GitHub's paths](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) as our action is meant to be used inside your job steps, not at the root of your workflow file (see [this issue](https://github.community/t5/GitHub-Actions/Path-filtering-for-jobs-and-steps/td-p/33617)).
 
 My recommendation is to put this action in a workflow that runs on every push to `master`.
 

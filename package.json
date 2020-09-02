@@ -1,7 +1,7 @@
 {
   "name": "has-changed-path",
   "version": "1.0.0",
-  "description": "Github Action that saves time and money in monorepo environments",
+  "description": "GitHub Action that saves time and money in monorepo environments",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint .",

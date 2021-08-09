@@ -20,18 +20,15 @@ async function hasChanged(pathsToSearch) {
   const paths = pathsToSearch.split(' ')
 
   //  --quiet: exits with 1 if there were differences (https://git-scm.com/docs/git-diff)
-  const exitCode = await exec.exec('git', [
-    'diff',
-    '--quiet',
-    'HEAD~1',
-    'HEAD',
-    '--',
-    ...paths,
-  ], {
-    ignoreReturnCode: true,
-    silent: false,
-    cwd: getCWD()
-  })
+  const exitCode = await exec.exec(
+    'git',
+    ['diff', '--quiet', '--no-index', 'HEAD~1', 'HEAD', '--', ...paths],
+    {
+      ignoreReturnCode: true,
+      silent: false,
+      cwd: getCWD(),
+    }
+  )
 
   const pathsChanged = exitCode === 1
 

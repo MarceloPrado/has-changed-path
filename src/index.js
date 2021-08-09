@@ -1,11 +1,10 @@
+const core = require('@actions/core')
 
-const core = require('@actions/core');
-
-const hasChanged = require('./hasChanged');
+const hasChanged = require('./hasChanged')
 
 async function run() {
   try {
-    const paths = core.getInput('paths', { required: true });
+    const paths = core.getInput('paths', { required: true })
     const changed = await hasChanged(paths)
 
     if (changed) {
@@ -16,8 +15,8 @@ async function run() {
 
     core.setOutput('changed', changed)
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error.message)
   }
 }
 
-run();
+run()

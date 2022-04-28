@@ -6,6 +6,7 @@ const hasChanged = require("./hasChanged");
 async function run() {
   try {
     const paths = core.getInput("paths", { required: true });
+    console.log(github.context);
     const isPullRequest = github.context.eventName == "pull_request";
     let targetBranch;
     if (isPullRequest) {

@@ -55,9 +55,11 @@ async function hasChanged(pathsToSearch, targetBranch) {
       }
     );
     core.info(`Comparing HEAD to branch ${targetBranch}`);
+    await exec.exec("git", ["diff", "HEAD", targetBranch]);
+    await exec.exec("git", ["diff", targetBranch]);
     const exitCode = await exec.getExecOutput(
       "git",
-      ["diff", "--quiet", "HEAD", `${targetBranch}`, "--", ...paths],
+      ["diff", "--quiet", "HEAD", targetBranch, "--", ...paths],
       {
         ignoreReturnCode: true,
         silent: false,

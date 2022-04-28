@@ -27,6 +27,13 @@
     "eslint": "^8.14.0",
     "eslint-plugin-import": "^2.26.0",
     "husky": "^7.0.4",
-    "jest": "^28.0.2"
+    "jest": "^28.0.2",
+    "lint-staged": "^12.4.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "yarn build",
+      "yarn lint"
+    ]
   }
 }

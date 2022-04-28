@@ -9841,19 +9841,20 @@ function throwsForInvalidPaths(pathsToSearch) {
   throw new Error("pathsToSearch needs to be a string");
 }
 
-function getCWD() {
-  const { GITHUB_WORKSPACE = ".", SOURCE = "." } = process.env;
-  return `${GITHUB_WORKSPACE}/${SOURCE}`;
-}
-
 async function hasChanged(pathsToSearch, targetBranch) {
   const paths = pathsToSearch.split(" ");
-  const cwd = getCWD();
+  const cwd = process.env.GITHUB_WORKSPACE || ".";
 
   // Add the directory as a git safe directory
   await exec.getExecOutput(
     "git",
-    ["config", "--global", "--add", "safe.directory", cwd],
+    [
+      "config",
+      "--global",
+      "--add",
+      "safe.directory",
+      process.env.GITHUB_WORKSPACE,
+    ],
     {
       ignoreReturnCode: true,
       silent: false,

@@ -5,7 +5,6 @@ const hasChanged = require("./hasChanged");
 
 async function run() {
   try {
-    console.log(JSON.stringify(github));
     const paths = core.getInput("paths", { required: true });
     core.info("Checking the following paths for changes:");
     for (const path of paths.split(" ")) {
@@ -17,8 +16,8 @@ async function run() {
 
     let targetBranch;
     if (isPullRequest) {
-      targetBranch = github.context.targetBranch;
-      core.info(`Comparing to target branch: ${targetBranch}`);
+      targetBranch = github.context.payload.pull_request.base.ref;
+      core.info(`Comparing to pull request target branch: ${targetBranch}`);
     }
     const changed = await hasChanged(paths, targetBranch);
 

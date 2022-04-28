@@ -57,7 +57,7 @@ async function hasChanged(pathsToSearch, targetBranch) {
     core.info(`Comparing HEAD to branch ${targetBranch}`);
     await exec.exec("git", ["diff", "HEAD", targetBranch]);
     await exec.exec("git", ["diff", targetBranch]);
-    const exitCode = await exec.getExecOutput(
+    const output = await exec.getExecOutput(
       "git",
       ["diff", "--quiet", "HEAD", targetBranch, "--", ...paths],
       {
@@ -67,10 +67,10 @@ async function hasChanged(pathsToSearch, targetBranch) {
       }
     );
     // If there is output in the stderr, something went wrong
-    if (exitCode.stderr.length > 0) {
-      throw new Error(`git diff had an failed. Output:\n${exitCode.stderr}`);
+    if (output.stderr.length > 0) {
+      throw new Error(`git diff had an failed. Output:\n${output.stderr}`);
     }
-    return exitCode === 1;
+    return output.exitCode === 1;
   } else {
     // Print information about current commit
     core.info(`Current working directory: ${cwd}`);
@@ -108,7 +108,7 @@ async function hasChanged(pathsToSearch, targetBranch) {
     );
     const targetHash = previousCommitHash.stdout.trim();
     //  --quiet: exits with 1 if there were differences (https://git-scm.com/docs/git-diff)
-    const exitCode = await exec.getExecOutput(
+    const output = await exec.getExecOutput(
       "git",
       ["diff", "--quiet", "HEAD", targetHash, "--", ...paths],
       {
@@ -118,10 +118,10 @@ async function hasChanged(pathsToSearch, targetBranch) {
       }
     );
     // If there is output in the stderr, something went wrong
-    if (exitCode.stderr.length > 0) {
-      throw new Error(`git diff had an failed. Output:\n${exitCode.stderr}`);
+    if (output.stderr.length > 0) {
+      throw new Error(`git diff had an failed. Output:\n${output.stderr}`);
     }
-    return exitCode === 1;
+    return output.exitCode === 1;
   }
 }
 

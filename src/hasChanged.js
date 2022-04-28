@@ -38,6 +38,13 @@ async function hasChanged(pathsToSearch, targetBranch) {
   if (targetBranch) {
     core.info(`Comparing against destination branch: ${targetBranch}`);
     targetHash = targetBranch;
+
+    core.info(`Fetching remote branch of ${targetBranch}`);
+    await exec.exec("git", ["fetch", "--depth", "1", "origin", targetBranch], {
+      ignoreReturnCode: true,
+      silent: false,
+      cwd: cwd,
+    });
   } else {
     // Print information about current commit
     core.info(`Current working directory: ${cwd}`);

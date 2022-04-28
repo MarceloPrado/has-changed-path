@@ -1,6 +1,8 @@
 const core = require("@actions/core");
-const hasChanged = require("./has-changed");
+
 const github = require("@actions/github");
+
+const hasChanged = require("./has-changed");
 
 async function run() {
   try {

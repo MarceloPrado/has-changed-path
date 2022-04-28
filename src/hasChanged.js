@@ -34,17 +34,41 @@ async function hasChanged(pathsToSearch, targetBranch) {
   );
 
   // Detect the target hash to compare to
-  let targetHash;
   if (targetBranch) {
     core.info(`Comparing against destination branch: ${targetBranch}`);
-    targetHash = targetBranch;
-
-    core.info(`Fetching remote branch of ${targetBranch}`);
-    await exec.exec("git", ["fetch", "--depth", "1", "origin", targetBranch], {
-      ignoreReturnCode: true,
-      silent: false,
-      cwd: cwd,
-    });
+    core.info(`Fetching remote branch`);
+    await exec.exec(
+      "git",
+      [
+        "fetch",
+        "--jobs=10",
+        "--no-tags",
+        "--depth=1",
+        "--no-recurse-submodules",
+        "origin",
+        `${targetBranch}:${targetBranch}`,
+      ],
+      {
+        ignoreReturnCode: true,
+        silent: false,
+        cwd: cwd,
+      }
+    );
+    core.info(`Comparing HEAD to branch ${targetBranch}`);
+    const exitCode = await exec.getExecOutput(
+      "git",
+      ["diff", "--quiet", "HEAD", `${targetBranch}`, "--", ...paths],
+      {
+        ignoreReturnCode: true,
+        silent: false,
+        cwd: cwd,
+      }
+    );
+    // If there is output in the stderr, something went wrong
+    if (exitCode.stderr.length > 0) {
+      throw new Error(`git diff had an failed. Output:\n${exitCode.stderr}`);
+    }
+    return exitCode === 1;
   } else {
     // Print information about current commit
     core.info(`Current working directory: ${cwd}`);
@@ -80,23 +104,23 @@ async function hasChanged(pathsToSearch, targetBranch) {
     core.info(
       `Comparing against previous commit:\n${previousCommitHash.stdout}`
     );
-    targetHash = previousCommitHash.stdout.trim();
-  }
-  //  --quiet: exits with 1 if there were differences (https://git-scm.com/docs/git-diff)
-  const exitCode = await exec.getExecOutput(
-    "git",
-    ["diff", "--quiet", "HEAD", targetHash, "--", ...paths],
-    {
-      ignoreReturnCode: true,
-      silent: false,
-      cwd: cwd,
+    const targetHash = previousCommitHash.stdout.trim();
+    //  --quiet: exits with 1 if there were differences (https://git-scm.com/docs/git-diff)
+    const exitCode = await exec.getExecOutput(
+      "git",
+      ["diff", "--quiet", "HEAD", targetHash, "--", ...paths],
+      {
+        ignoreReturnCode: true,
+        silent: false,
+        cwd: cwd,
+      }
+    );
+    // If there is output in the stderr, something went wrong
+    if (exitCode.stderr.length > 0) {
+      throw new Error(`git diff had an failed. Output:\n${exitCode.stderr}`);
     }
-  );
-  // If there is output in the stderr, something went wrong
-  if (exitCode.stderr.length > 0) {
-    throw new Error(`git diff had an failed. Output:\n${exitCode.stderr}`);
+    return exitCode === 1;
   }
-  return exitCode === 1;
 }
 
 module.exports = main;

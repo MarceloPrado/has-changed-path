@@ -10126,9 +10126,10 @@ const hasChanged = __nccwpck_require__(8632);
 
 async function run() {
   try {
+    console.log(JSON.stringify(github));
     const paths = core.getInput("paths", { required: true });
     core.info("Checking the following paths for changes:");
-    for (const path of paths) {
+    for (const path of paths.split(" ")) {
       core.info("  " + path);
     }
     const isPullRequest = github.context.eventName === "pull_request";
@@ -10138,6 +10139,7 @@ async function run() {
     let targetBranch;
     if (isPullRequest) {
       targetBranch = github.context.targetBranch;
+      core.info(`Comparing to target branch: ${targetBranch}`);
     }
     const changed = await hasChanged(paths, targetBranch);
 

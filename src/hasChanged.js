@@ -1,10 +1,10 @@
 const exec = require("@actions/exec");
 const core = require("@actions/core");
 
-async function main(pathsToSearch = "") {
+async function main(pathsToSearch = "", targetBranch) {
   throwsForInvalidPaths(pathsToSearch);
 
-  return hasChanged(pathsToSearch);
+  return hasChanged(pathsToSearch, targetBranch);
 }
 
 function throwsForInvalidPaths(pathsToSearch) {

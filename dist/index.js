@@ -9830,10 +9830,10 @@ function wrappy (fn, cb) {
 const exec = __nccwpck_require__(1514);
 const core = __nccwpck_require__(2186);
 
-async function main(pathsToSearch = "") {
+async function main(pathsToSearch = "", targetBranch) {
   throwsForInvalidPaths(pathsToSearch);
 
-  return hasChanged(pathsToSearch);
+  return hasChanged(pathsToSearch, targetBranch);
 }
 
 function throwsForInvalidPaths(pathsToSearch) {

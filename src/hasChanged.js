@@ -21,6 +21,18 @@ async function hasChanged(pathsToSearch, targetBranch) {
   const paths = pathsToSearch.split(" ");
   const cwd = getCWD();
 
+  // Add the directory as a git safe directory
+  await exec.getExecOutput(
+    "git",
+    ["config", "--global", "--add", "safe.directory", cwd],
+    {
+      ignoreReturnCode: true,
+      silent: false,
+      cwd: cwd,
+    }
+  );
+
+  // Detect the target hash to compare to
   let targetHash;
   if (targetBranch) {
     core.info(`Comparing against destination branch: ${targetBranch}`);

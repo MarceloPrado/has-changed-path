@@ -17,14 +17,14 @@
   },
   "homepage": "https://github.com/MarceloPrado/has-changed-path#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/exec": "^1.0.4",
+    "@actions/core": "^1.7.0",
+    "@actions/exec": "^1.1.1",
     "@actions/github": "^5.0.1"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.23.0",
-    "eslint": "^7.7.0",
-    "eslint-plugin-import": "^2.22.0",
-    "jest": "^26.4.2"
+    "@vercel/ncc": "^0.33.4",
+    "eslint": "^8.14.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.0.2"
   }
 }

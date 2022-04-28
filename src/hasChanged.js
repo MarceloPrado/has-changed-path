@@ -88,6 +88,7 @@ async function hasChanged(pathsToSearch, targetBranch) {
         `Failed to detect previous commit, exit code ${currentCommit.exitCode}`
       );
     }
+
     // Get hash of previous commit
     const previousCommitHash = await exec.getExecOutput(
       "git",
@@ -98,6 +99,7 @@ async function hasChanged(pathsToSearch, targetBranch) {
         cwd: cwd,
       }
     );
+
     if (previousCommitHash.exitCode != 0) {
       throw new Error(
         `Failed to detect previous commit, exit code ${previousCommitHash.exitCode}`

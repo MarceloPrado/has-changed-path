@@ -4,3 +4,5 @@
 yarn build
 yarn test
 yarn lint
+
+git add -A dist

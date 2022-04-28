@@ -5,9 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint .",
-    "prepare": "ncc build src/index.js -o dist --source-map",
+    "build": "ncc build src/index.js -o dist --source-map",
     "test": "jest",
-    "all": "yarn lint && yarn prepare && yarn test"
+    "all": "yarn lint && yarn prepare && yarn test",
+    "prepare": "husky install"
   },
   "repository": "git@github.com:MarceloPrado/has-changed-path.git",
   "author": "Marcelo Prado <lelo@hey.com>",
@@ -25,6 +26,7 @@
     "@vercel/ncc": "^0.33.4",
     "eslint": "^8.14.0",
     "eslint-plugin-import": "^2.26.0",
+    "husky": "^7.0.4",
     "jest": "^28.0.2"
   }
 }

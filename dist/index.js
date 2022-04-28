@@ -10127,6 +10127,7 @@ const hasChanged = __nccwpck_require__(8632);
 async function run() {
   try {
     const paths = core.getInput("paths", { required: true });
+    console.log(github.context);
     const isPullRequest = github.context.eventName == "pull_request";
     let targetBranch;
     if (isPullRequest) {

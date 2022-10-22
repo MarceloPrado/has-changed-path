@@ -1,15 +1,19 @@
-name: "Has Changed Path"
-description: "Detects whether a path or a combination of paths were changed in the previous commit"
+name: Has Changed Path
+description: Detects whether a path or a combination of paths were changed in the previous commit
 inputs:
   paths: # one or more paths
-    description: "Paths to detect changes"
+    description: Paths to detect changes
     required: true
+  commits:
+    description: Number of commits, default is 1.
+    required: false
+    default: "1"
 outputs:
   changed:
-    description: "Boolean indicating if the paths were changed in previous commit"
+    description: Boolean indicating if the paths were changed in previous commit
 runs:
-  using: "node12"
-  main: "dist/index.js"
+  using: node16
+  main: dist/index.js
 branding:
   icon: terminal
   color: gray-dark

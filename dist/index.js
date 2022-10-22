@@ -2594,7 +2594,7 @@ const hasChanged = __webpack_require__(632);
 async function run() {
   try {
     const paths = core.getInput('paths', { required: true });
-    const commits = parseInt(core.getInput('commits', { required: false, trimWhitespace: true }) || "1", 10);
+    const commits = core.getInput('commits', { required: false, trimWhitespace: true }) || "";
     const changed = await hasChanged(paths, commits)
 
     if (changed) {
@@ -3402,7 +3402,7 @@ module.exports = require("net");
 
 const exec = __webpack_require__(514)
 
-async function main(pathsToSearch = '', commits = 1) {
+async function main(pathsToSearch = '', commits = '') {
   throwsForInvalidPaths(pathsToSearch)
 
   return hasChanged(pathsToSearch, commits)

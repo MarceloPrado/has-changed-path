@@ -16,7 +16,7 @@ function getCWD() {
   return `${GITHUB_WORKSPACE}/${SOURCE}`
 }
 
-async function hasChanged(pathsToSearch, commits) {
+async function hasChanged(pathsToSearch, commits = 1) {
   const paths = pathsToSearch.split(' ')
 
   //  --quiet: exits with 1 if there were differences (https://git-scm.com/docs/git-diff)

@@ -26,7 +26,7 @@ My recommendation is to put this action in a workflow that runs on every push to
 
 ### Important info:
 
-Notice that **you must configure `fetch-depth` in your `actions/checkout@v2`**. That's because their default option now is to fetch only the latest commit instead of all history ([more info](https://github.com/actions/checkout))
+Notice that **you must configure `fetch-depth` in your `actions/checkout@v4`**. That's because their default option now is to fetch only the latest commit instead of all history ([more info](https://github.com/actions/checkout))
 
 If you want to fetch all history, pass `fetch-depth: 0`.
 
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 100
 
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 100
 
@@ -99,12 +99,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 100
           path: main
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 100
           repsitory: my-org/my-tools

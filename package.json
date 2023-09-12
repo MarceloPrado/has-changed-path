@@ -1,6 +1,6 @@
 {
   "name": "has-changed-path",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GitHub Action that saves time and money in monorepo environments",
   "main": "src/index.js",
   "scripts": {
